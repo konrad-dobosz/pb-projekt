@@ -1,0 +1,38 @@
+﻿services:
+  pb-projekt:
+    image: pb-projekt
+    container_name: pb-projekt
+    build:
+      context: .
+      dockerfile: pb-projekt/Dockerfile
+    environment:
+      - ASPNETCORE_HTTP_PORTS=8080
+    depends_on: 
+      - mysql
+    ports:
+      - 8080:8080
+    restart: always
+    networks: 
+      - dotnet_app
+  
+  mysql:
+    image: mysql:8.3
+    container_name: mysql
+    volumes:
+      - "data:/var/lib/mysql"
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: root_password
+      MYSQL_DATABASE: db
+      MYSQL_USER: user
+      MYSQL_PASSWORD: 12345
+    restart: always
+    networks: 
+      - dotnet_app
+
+volumes: 
+  data:
+    
+networks:
+  dotnet_app:
