@@ -1,0 +1,22 @@
+@{
+    ViewData["Title"] = "Login";
+}
+
+<div>
+    <h2>Logowanie</h2>
+    
+    <div class="container">
+      @using (Html.BeginForm("Login", "Auth", FormMethod.Post)) {
+        <div>
+          <label for="Email">Email:</label><br>
+          @Html.TextBox("Email")<br>
+        </div>
+        <div>
+          <label for="Password">Hasło:</label><br>
+          @Html.Password("Password")<br>
+        </div>
+        <input type="submit" value="Zaloguj">
+      }
+    </div>
+    <link rel="stylesheet" type="text/css" href="../css/style.css"/>
+</div>

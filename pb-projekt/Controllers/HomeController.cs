@@ -16,9 +16,9 @@ public class HomeController : Controller
 
     public IActionResult Index()
     {
-        User user = new User { Name = "Test", Surname = "Test 2", Password = "123", Email = "test@test.pl" };
-        _appDbContext.Users.Add(user);
-        _appDbContext.SaveChanges();
+        // User user = new User { Name = "Test", Surname = "Test 2", Password = "123", Email = "test@test.pl" };
+        // _appDbContext.Users.Add(user);
+        // _appDbContext.SaveChanges();
         return View();
     }
 }
