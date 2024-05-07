@@ -1,0 +1,22 @@
+@{
+    ViewData["Title"] = "Rejestracja";
+}
+
+<div>
+    <h2>Rejestracja</h2>
+    
+    <div class="container">
+        @using (Html.BeginForm("Register", "Auth", FormMethod.Post)) {
+            <div>
+                <label for="Email">Email:</label><br>
+                @Html.TextBox("Email")<br>
+            </div>
+            <div>
+                <label for="Password">Hasło:</label><br>
+                @Html.Password("Password")<br>
+            </div>
+            <input type="submit" value="Zarejestruj">
+        }
+    </div>
+    <link rel="stylesheet" type="text/css" href="../css/style.css"/>
+</div>

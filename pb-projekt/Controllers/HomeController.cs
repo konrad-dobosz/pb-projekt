@@ -14,6 +14,8 @@ public class HomeController : Controller
         _appDbContext = appDbContext;
     }
 
+    [HttpGet]
+    [Route("/", Name = "Home")]
     public IActionResult Index()
     {
         // User user = new User { Name = "Test", Surname = "Test 2", Password = "123", Email = "test@test.pl" };
