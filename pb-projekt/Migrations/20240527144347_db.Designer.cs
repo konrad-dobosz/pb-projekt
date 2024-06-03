@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using pb_projekt.Data;
 
@@ -10,9 +11,11 @@ using pb_projekt.Data;
 namespace pb_projekt.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240527144347_db")]
+    partial class db
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -151,139 +154,6 @@ namespace pb_projekt.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("pb_projekt.Models.Cargo", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<string>("CargoType")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("varchar(100)");
-
-                    b.Property<string>("DestinationPort")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("varchar(100)");
-
-                    b.Property<int?>("HangarId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("SecurityLevel")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("varchar(50)");
-
-                    b.Property<string>("SerialNumber")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("varchar(100)");
-
-                    b.Property<int>("ShipId")
-                        .HasColumnType("int");
-
-                    b.Property<double>("Weight")
-                        .HasColumnType("double");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("HangarId");
-
-                    b.HasIndex("ShipId");
-
-                    b.ToTable("Cargoes");
-                });
-
-            modelBuilder.Entity("pb_projekt.Models.Hangar", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<int>("AvailableSpace")
-                        .HasColumnType("int");
-
-                    b.Property<int>("LoadedCrates")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Hangars");
-                });
-
-            modelBuilder.Entity("pb_projekt.Models.LandShipment", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<int>("HangarId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("HangarId");
-
-                    b.ToTable("LandShipments");
-                });
-
-            modelBuilder.Entity("pb_projekt.Models.Ship", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<double>("CargoCapacity")
-                        .HasColumnType("double");
-
-                    b.Property<string>("DockingSpace")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("varchar(100)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Ships");
-                });
-
-            modelBuilder.Entity("pb_projekt.Models.UnloadingEquipment", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<string>("EquipmentType")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("varchar(100)");
-
-                    b.Property<bool>("IsAssignedToShip")
-                        .HasColumnType("tinyint(1)");
-
-                    b.Property<int?>("LandShipmentId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("LastInspectionDate")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<string>("SerialNumber")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("varchar(100)");
-
-                    b.Property<int?>("ShipId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("LandShipmentId");
-
-                    b.HasIndex("ShipId");
-
-                    b.ToTable("UnloadingEquipments");
-                });
-
             modelBuilder.Entity("pb_projekt.Models.User", b =>
                 {
                     b.Property<string>("Id")
@@ -348,30 +218,6 @@ namespace pb_projekt.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
-            modelBuilder.Entity("pb_projekt.Models.Vehicle", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("ArrivalDate")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<string>("DestinationPort")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("varchar(100)");
-
-                    b.Property<int>("LandShipmentId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("LandShipmentId");
-
-                    b.ToTable("Vehicles");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -421,81 +267,6 @@ namespace pb_projekt.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("pb_projekt.Models.Cargo", b =>
-                {
-                    b.HasOne("pb_projekt.Models.Hangar", "Hangar")
-                        .WithMany("Cargoes")
-                        .HasForeignKey("HangarId");
-
-                    b.HasOne("pb_projekt.Models.Ship", "Ship")
-                        .WithMany("Cargoes")
-                        .HasForeignKey("ShipId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Hangar");
-
-                    b.Navigation("Ship");
-                });
-
-            modelBuilder.Entity("pb_projekt.Models.LandShipment", b =>
-                {
-                    b.HasOne("pb_projekt.Models.Hangar", "Hangar")
-                        .WithMany("LandShipments")
-                        .HasForeignKey("HangarId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Hangar");
-                });
-
-            modelBuilder.Entity("pb_projekt.Models.UnloadingEquipment", b =>
-                {
-                    b.HasOne("pb_projekt.Models.LandShipment", "LandShipment")
-                        .WithMany("UnloadingEquipments")
-                        .HasForeignKey("LandShipmentId");
-
-                    b.HasOne("pb_projekt.Models.Ship", "Ship")
-                        .WithMany("UnloadingEquipments")
-                        .HasForeignKey("ShipId");
-
-                    b.Navigation("LandShipment");
-
-                    b.Navigation("Ship");
-                });
-
-            modelBuilder.Entity("pb_projekt.Models.Vehicle", b =>
-                {
-                    b.HasOne("pb_projekt.Models.LandShipment", "LandShipment")
-                        .WithMany("Vehicles")
-                        .HasForeignKey("LandShipmentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("LandShipment");
-                });
-
-            modelBuilder.Entity("pb_projekt.Models.Hangar", b =>
-                {
-                    b.Navigation("Cargoes");
-
-                    b.Navigation("LandShipments");
-                });
-
-            modelBuilder.Entity("pb_projekt.Models.LandShipment", b =>
-                {
-                    b.Navigation("UnloadingEquipments");
-
-                    b.Navigation("Vehicles");
-                });
-
-            modelBuilder.Entity("pb_projekt.Models.Ship", b =>
-                {
-                    b.Navigation("Cargoes");
-
-                    b.Navigation("UnloadingEquipments");
                 });
 #pragma warning restore 612, 618
         }

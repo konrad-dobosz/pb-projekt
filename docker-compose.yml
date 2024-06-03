@@ -1,4 +1,4 @@
-﻿services:
+services:
   pb-projekt:
     image: pb-projekt
     container_name: pb-projekt
