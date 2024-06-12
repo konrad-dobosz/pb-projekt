@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace pb_projekt.Models
@@ -12,13 +11,14 @@ namespace pb_projekt.Models
         [Required]
         public double CargoCapacity { get; set; }
 
+        [Required]
+        [MaxLength(100)]
+        public string DockingSpace { get; set; }
 
         public ICollection<Cargo> Cargoes { get; set; } = new List<Cargo>();
 
         public ICollection<UnloadingEquipment> UnloadingEquipments { get; set; } = new List<UnloadingEquipment>();
 
-        [Required]
-        [MaxLength(100)]
-        public string DockingSpace { get; set; }
+        public bool IsUnloadingInProgress => UnloadingEquipments.Any();
     }
 }

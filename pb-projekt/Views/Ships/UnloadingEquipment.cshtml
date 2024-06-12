@@ -1,0 +1,36 @@
+﻿@model List<pb_projekt.Models.UnloadingEquipment>
+
+@{
+    ViewData["Title"] = "Unloading Equipment";
+}
+
+<h2 style="text-align: center; margin-bottom: 20px;">Unloading Equipment for Ship</h2>
+
+@if (Model.Any())
+{
+        <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px;">
+            <thead>
+                <tr>
+                    <th style="padding: 10px; border: 1px solid #ddd; background-color: #f2f2f2; text-align: left;">Serial Number</th>
+                    <th style="padding: 10px; border: 1px solid #ddd; background-color: #f2f2f2; text-align: left;">Equipment Type</th>
+                    <th style="padding: 10px; border: 1px solid #ddd; background-color: #f2f2f2; text-align: left;">Last Inspection Date</th>
+                </tr>
+            </thead>
+            <tbody>
+            @foreach (var equipment in Model)
+            {
+                        <tr>
+                            <td style="padding: 10px; border: 1px solid #ddd; text-align: left;">@equipment.SerialNumber</td>
+                            <td style="padding: 10px; border: 1px solid #ddd; text-align: left;">@equipment.EquipmentType</td>
+                            <td style="padding: 10px; border: 1px solid #ddd; text-align: left;">@equipment.LastInspectionDate.ToString("yyyy-MM-dd")</td>
+                        </tr>
+            }
+            </tbody>
+        </table>
+}
+else
+{
+        <p>No unloading equipment assigned to this ship.</p>
+}
+
+<a href="@Url.Action("Index", "Ship")" style="text-decoration: none; color: blue;">Back to Ships</a>
