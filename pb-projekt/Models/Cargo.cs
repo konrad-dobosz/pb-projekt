@@ -1,5 +1,4 @@
 using System.ComponentModel.DataAnnotations;
-using Microsoft.AspNetCore.Identity;
 
 namespace pb_projekt.Models
 {
@@ -29,8 +28,5 @@ namespace pb_projekt.Models
 
         public int ShipId { get; set; }
         public Ship Ship { get; set; }
-
-        public int? HangarId { get; set; }
-        public Hangar Hangar { get; set; }
     }
 }

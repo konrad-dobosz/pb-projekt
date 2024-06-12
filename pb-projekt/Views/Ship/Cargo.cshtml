@@ -1,0 +1,40 @@
+﻿@model pb_projekt.Models.Ship
+
+@{
+    ViewData["Title"] = $"Cargo of Ship {Model.Id}";
+}
+
+<h2 style="text-align: center; margin-bottom: 20px;">Cargo of Ship @Model.Id</h2>
+
+@if (!Model.Cargoes.Any())
+{
+        <p style="text-align: center;">No cargo available for this ship.</p>
+}
+else
+{
+        <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px;">
+            <thead>
+                <tr>
+                    <th style="padding: 10px; border: 1px solid #ddd; background-color: #f2f2f2; text-align: left;">ID</th>
+                    <th style="padding: 10px; border: 1px solid #ddd; background-color: #f2f2f2; text-align: left;">Serial Number</th>
+                    <th style="padding: 10px; border: 1px solid #ddd; background-color: #f2f2f2; text-align: left;">Security Level</th>
+                    <th style="padding: 10px; border: 1px solid #ddd; background-color: #f2f2f2; text-align: left;">Weight</th>
+                    <th style="padding: 10px; border: 1px solid #ddd; background-color: #f2f2f2; text-align: left;">Cargo Type</th>
+                    <th style="padding: 10px; border: 1px solid #ddd; background-color: #f2f2f2; text-align: left;">Destination Port</th>
+                </tr>
+            </thead>
+            <tbody>
+            @foreach (var cargo in Model.Cargoes)
+            {
+                        <tr>
+                            <td style="padding: 10px; border: 1px solid #ddd; text-align: left;">@cargo.Id</td>
+                            <td style="padding: 10px; border: 1px solid #ddd; text-align: left;">@cargo.SerialNumber</td>
+                            <td style="padding: 10px; border: 1px solid #ddd; text-align: left;">@cargo.SecurityLevel</td>
+                            <td style="padding: 10px; border: 1px solid #ddd; text-align: left;">@cargo.Weight</td>
+                            <td style="padding: 10px; border: 1px solid #ddd; text-align: left;">@cargo.CargoType</td>
+                            <td style="padding: 10px; border: 1px solid #ddd; text-align: left;">@cargo.DestinationPort</td>
+                        </tr>
+            }
+            </tbody>
+        </table>
+}
