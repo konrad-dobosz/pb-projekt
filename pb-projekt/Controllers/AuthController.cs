@@ -9,6 +9,7 @@ public class AuthController(SignInManager<User> signInManager, UserManager<User>
 {
     
     [HttpGet]
+    [Route("/auth/login", Name = "Login")]
     public ActionResult Login()
     {
         return View();
@@ -18,7 +19,6 @@ public class AuthController(SignInManager<User> signInManager, UserManager<User>
     public async Task<ActionResult> Login(string Email, string Password)
     {
         var result = await signInManager.PasswordSignInAsync(Email, Password, false, false);
-
         if (result.Succeeded)
         {
             Console.WriteLine("OK");
@@ -28,6 +28,15 @@ public class AuthController(SignInManager<User> signInManager, UserManager<User>
         Console.WriteLine(Password);
         
         return View();
+    }
+
+    [HttpGet]
+    [Route("/auth/logout")]
+    public async Task<ActionResult> Logout()
+    {
+        await signInManager.SignOutAsync();
+
+        return RedirectToRoute("Login");
     }
     
     [HttpGet]

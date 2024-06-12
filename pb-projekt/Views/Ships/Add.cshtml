@@ -1,0 +1,25 @@
+@model IEnumerable<pb_projekt.Models.Ship>
+
+@{
+    ViewData["Title"] = "Add ship";
+}
+
+<h2 style="text-align: center; margin-bottom: 20px;">Add ship</h2>
+
+<div class="container">
+      @using (Html.BeginForm("Add", "Ships", FormMethod.Post)) {
+        <div>
+          <label for="Capacity">Capacity:</label><br>
+          @Html.TextBox("Capacity")<br>
+        </div>
+        <div>
+          <label for="Dock">Docking space:</label><br>
+          @Html.TextBox("Dock")<br>
+        </div>
+        <input type="submit" value="Dodaj">
+      }
+    </div>
+
+<footer style="background-color: #333; color: #fff; text-align: center; padding: 20px 0; position: fixed; bottom: 0; width: 100%;">
+    <p>&copy; 2024 - pb_projekt</p>
+</footer>
