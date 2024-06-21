@@ -1,0 +1,26 @@
+﻿@model IEnumerable<pb_projekt.Models.Hangar>
+
+@{
+    ViewData["Title"] = "Hangars";
+}
+
+<h2>Hangars</h2>
+
+<table>
+    <tr>
+        <th>Available Space</th>
+        <th>Loaded Crates</th>
+        <th>Actions</th>
+    </tr>
+
+    @foreach (var hangar in Model)
+    {
+            <tr>
+                <td>@hangar.AvailableSpace</td>
+                <td>@hangar.LoadedCrates</td>
+                <td>
+                    <a href="@Url.RouteUrl("HangarCargo", new { id = hangar.Id })">View Cargo</a>
+                </td>
+            </tr>
+    }
+</table>

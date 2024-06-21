@@ -1,0 +1,28 @@
+﻿@model pb_projekt.Models.LandShipment
+
+@{
+    ViewData["Title"] = "Land Shipment Cargo";
+}
+
+<h2>Land Shipment Cargo</h2>
+
+<table>
+    <tr>
+        <th>Serial Number</th>
+        <th>Security Level</th>
+        <th>Weight</th>
+        <th>Cargo Type</th>
+        <th>Destination Port</th>
+    </tr>
+
+    @foreach (var cargo in Model.Cargoes)
+    {
+            <tr>
+                <td>@cargo.SerialNumber</td>
+                <td>@cargo.SecurityLevel</td>
+                <td>@cargo.Weight</td>
+                <td>@cargo.CargoType</td>
+                <td>@cargo.DestinationPort</td>
+            </tr>
+    }
+</table>

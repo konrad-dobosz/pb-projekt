@@ -1,41 +1,41 @@
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using pb_projekt.Data;
-using pb_projekt.Models;
-using System.Threading.Tasks;
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.EntityFrameworkCore;
+    using pb_projekt.Data;
+    using pb_projekt.Models;
+    using System.Threading.Tasks;
 
-namespace pb_projekt.Controllers
-{
-    public class HomeController : Controller
+    namespace pb_projekt.Controllers
     {
-        private readonly AppDbContext _appDbContext;
-
-        public HomeController(AppDbContext appDbContext)
+        public class HomeController : Controller
         {
-            _appDbContext = appDbContext;
-        }
+            private readonly AppDbContext _appDbContext;
 
-        [HttpGet]
-        [Route("/", Name = "Home")]
-        public IActionResult Index()
-        {
-            var ships = _appDbContext.Ships.ToList();
-            return View(ships);
-        }
-
-        [HttpGet]
-        public async Task<IActionResult> Details(int id)
-        {
-            var ship = await _appDbContext.Ships
-                .Include(s => s.Cargoes) // Eagerly load the related cargoes
-                .FirstOrDefaultAsync(s => s.Id == id);
-
-            if (ship == null)
+            public HomeController(AppDbContext appDbContext)
             {
-                return NotFound();
+                _appDbContext = appDbContext;
             }
 
-            return View(ship);
+            [HttpGet]
+            [Route("/", Name = "Home")]
+            public IActionResult Index()
+            {
+                var ships = _appDbContext.Ships.ToList();
+                return View(ships);
+            }
+
+            [HttpGet]
+            public async Task<IActionResult> Details(int id)
+            {
+                var ship = await _appDbContext.Ships
+                    .Include(s => s.Cargoes) // Eagerly load the related cargoes
+                    .FirstOrDefaultAsync(s => s.Id == id);
+
+                if (ship == null)
+                {
+                    return NotFound();
+                }
+
+                return View(ship);
+            }
         }
     }
-}

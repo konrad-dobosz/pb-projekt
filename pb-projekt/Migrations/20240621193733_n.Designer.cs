@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using pb_projekt.Data;
 
@@ -10,9 +11,11 @@ using pb_projekt.Data;
 namespace pb_projekt.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240621193733_n")]
+    partial class n
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -170,9 +173,6 @@ namespace pb_projekt.Migrations
                     b.Property<int?>("HangarId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("LandShipmentId")
-                        .HasColumnType("int");
-
                     b.Property<string>("SecurityLevel")
                         .IsRequired()
                         .HasMaxLength(50)
@@ -192,8 +192,6 @@ namespace pb_projekt.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("HangarId");
-
-                    b.HasIndex("LandShipmentId");
 
                     b.HasIndex("ShipId");
 
@@ -434,10 +432,6 @@ namespace pb_projekt.Migrations
                         .WithMany("Cargoes")
                         .HasForeignKey("HangarId");
 
-                    b.HasOne("pb_projekt.Models.LandShipment", null)
-                        .WithMany("Cargoes")
-                        .HasForeignKey("LandShipmentId");
-
                     b.HasOne("pb_projekt.Models.Ship", "Ship")
                         .WithMany("Cargoes")
                         .HasForeignKey("ShipId")
@@ -493,8 +487,6 @@ namespace pb_projekt.Migrations
 
             modelBuilder.Entity("pb_projekt.Models.LandShipment", b =>
                 {
-                    b.Navigation("Cargoes");
-
                     b.Navigation("UnloadingEquipments");
 
                     b.Navigation("Vehicles");

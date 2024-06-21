@@ -23,7 +23,7 @@ namespace pb_projekt.Controllers
             var ships = await _context.Ships.Include(s => s.UnloadingEquipments).ToListAsync();
             return View(ships);
         }
-        
+
         [HttpGet]
         [Route("/ships/{id}/cargo", Name = "ShipCargo")]
         public async Task<IActionResult> Cargo(int id)
@@ -39,7 +39,7 @@ namespace pb_projekt.Controllers
 
             return View(ship);
         }
-        
+
         [HttpGet]
         [Route("/ships/{id}/unloading-equipment", Name = "ShipUnloadingEquipment")]
         public async Task<IActionResult> UnloadingEquipment(int id)
@@ -55,14 +55,14 @@ namespace pb_projekt.Controllers
 
             return View(ship.UnloadingEquipments.ToList());
         }
-        
+
         [HttpGet]
         [Route("/ships/add", Name = "AddShip")]
         public async Task<IActionResult> Add()
         {
             return View();
         }
-        
+
         [HttpPost]
         public async Task<IActionResult> Add(double capacity, string dock)
         {
@@ -75,7 +75,7 @@ namespace pb_projekt.Controllers
             await _context.SaveChangesAsync();
             return RedirectToRoute("Ships");
         }
-        
+
         [HttpPost]
         public async Task<IActionResult> Remove(int shipId)
         {

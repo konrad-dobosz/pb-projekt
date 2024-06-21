@@ -1,0 +1,28 @@
+﻿@model IEnumerable<pb_projekt.Models.Cargo>
+
+@{
+    ViewData["Title"] = "Hangar Cargo";
+}
+
+<h2>Hangar Cargo</h2>
+
+<table>
+    <tr>
+        <th>Serial Number</th>
+        <th>Security Level</th>
+        <th>Weight</th>
+        <th>Cargo Type</th>
+        <th>Destination Port</th>
+    </tr>
+
+    @foreach (var cargo in Model)
+    {
+            <tr>
+                <td>@cargo.SerialNumber</td>
+                <td>@cargo.SecurityLevel</td>
+                <td>@cargo.Weight</td>
+                <td>@cargo.CargoType</td>
+                <td>@cargo.DestinationPort</td>
+            </tr>
+    }
+</table>

@@ -1,0 +1,27 @@
+﻿@model IEnumerable<pb_projekt.Models.LandShipment>
+
+@{
+    ViewData["Title"] = "Land Shipments";
+}
+
+<h2>Land Shipments</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var landShipment in Model)
+        {
+                <tr>
+                    <td>@landShipment.Id</td>
+                    <td>
+                        <a asp-controller="LandShipments" asp-action="Cargo" asp-route-id="@landShipment.Id">View Unloading Equipment</a>
+                    </td>
+                </tr>
+        }
+    </tbody>
+</table>

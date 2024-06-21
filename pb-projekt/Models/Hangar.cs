@@ -10,7 +10,7 @@ namespace pb_projekt.Models
 
         [Required]
         public int AvailableSpace { get; set; }
-        
+
         [Required]
         public int LoadedCrates { get; set; }
 
