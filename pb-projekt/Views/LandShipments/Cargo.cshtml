@@ -4,7 +4,7 @@
     ViewData["Title"] = "Land Shipment Cargo";
 }
 
-<h2 style="text-align: center; margin-bottom: 20px;">Land Shipment Cargo</h2>
+<h2 class="header-text">Land Shipment Cargo</h2>
 
 @if (!Model.Cargoes.Any())
 {
@@ -12,25 +12,25 @@
 }
 else
 {
-        <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px;">
+        <table class="primary">
             <thead>
                 <tr>
-                    <th style="padding: 10px; border: 1px solid #ddd; background-color: #f2f2f2; text-align: left;">Serial Number</th>
-                    <th style="padding: 10px; border: 1px solid #ddd; background-color: #f2f2f2; text-align: left;">Security Level</th>
-                    <th style="padding: 10px; border: 1px solid #ddd; background-color: #f2f2f2; text-align: left;">Weight</th>
-                    <th style="padding: 10px; border: 1px solid #ddd; background-color: #f2f2f2; text-align: left;">Cargo Type</th>
-                    <th style="padding: 10px; border: 1px solid #ddd; background-color: #f2f2f2; text-align: left;">Destination Port</th>
+                    <th>Serial Number</th>
+                    <th>Security Level</th>
+                    <th>Weight</th>
+                    <th>Cargo Type</th>
+                    <th>Destination Port</th>
                 </tr>
             </thead>
             <tbody>
             @foreach (var cargo in Model.Cargoes)
             {
                         <tr>
-                            <td style="padding: 10px; border: 1px solid #ddd; text-align: left;">@cargo.SerialNumber</td>
-                            <td style="padding: 10px; border: 1px solid #ddd; text-align: left;">@cargo.SecurityLevel</td>
-                            <td style="padding: 10px; border: 1px solid #ddd; text-align: left;">@cargo.Weight</td>
-                            <td style="padding: 10px; border: 1px solid #ddd; text-align: left;">@cargo.CargoType</td>
-                            <td style="padding: 10px; border: 1px solid #ddd; text-align: left;">@cargo.DestinationPort</td>
+                            <td>@cargo.SerialNumber</td>
+                            <td>@cargo.SecurityLevel</td>
+                            <td>@cargo.Weight</td>
+                            <td>@cargo.CargoType</td>
+                            <td>@cargo.DestinationPort</td>
                         </tr>
             }
             </tbody>

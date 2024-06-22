@@ -4,14 +4,14 @@
     ViewData["Title"] = "Hangars";
 }
 
-<h2 style="text-align: center; margin-bottom: 20px;">Hangars</h2>
+<h2 class="header-text">Hangars</h2>
 
-<table style="width: 100%; border-collapse: collapse; margin-bottom: 20px;">
+<table class="primary">
     <thead>
         <tr>
-            <th style="padding: 10px; border: 1px solid #ddd; background-color: #f2f2f2; text-align: left;">Available Space</th>
-            <th style="padding: 10px; border: 1px solid #ddd; background-color: #f2f2f2; text-align: left;">Total Cargo Count</th>
-            <th style="padding: 10px; border: 1px solid #ddd; background-color: #f2f2f2; text-align: left;">Actions</th>
+            <th>Available Space</th>
+            <th>Total Cargo Count</th>
+            <th>Actions</th>
         </tr>
     </thead>
     <tbody>
@@ -20,9 +20,9 @@
             var totalCargoCount = hangar.Cargoes.Count + hangar.LandShipments.Sum(ls => ls.Cargoes.Count);
 
                 <tr>
-                    <td style="padding: 10px; border: 1px solid #ddd; text-align: left;">@hangar.AvailableSpace</td>
-                    <td style="padding: 10px; border: 1px solid #ddd; text-align: left;">@totalCargoCount</td>
-                    <td style="padding: 10px; border: 1px solid #ddd; text-align: left;">
+                    <td>@hangar.AvailableSpace</td>
+                    <td>@totalCargoCount</td>
+                    <td>
                         <a href="@Url.Action("Cargo", "Hangars", new { id = hangar.Id })" style="text-decoration: none; color: blue;">View Cargo</a>
                     </td>
                 </tr>

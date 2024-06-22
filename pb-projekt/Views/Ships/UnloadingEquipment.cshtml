@@ -4,25 +4,25 @@
     ViewData["Title"] = "Unloading Equipment";
 }
 
-<h2 style="text-align: center; margin-bottom: 20px;">Unloading Equipment for Ship</h2>
+<h2 class="header-text">Unloading Equipment for Ship</h2>
 
 @if (Model.Any())
 {
-        <table style="width: 100%; border-collapse: collapse; margin-bottom: 20px;">
+        <table class="primary">
             <thead>
                 <tr>
-                    <th style="padding: 10px; border: 1px solid #ddd; background-color: #f2f2f2; text-align: left;">Serial Number</th>
-                    <th style="padding: 10px; border: 1px solid #ddd; background-color: #f2f2f2; text-align: left;">Equipment Type</th>
-                    <th style="padding: 10px; border: 1px solid #ddd; background-color: #f2f2f2; text-align: left;">Last Inspection Date</th>
+                    <th>Serial Number</th>
+                    <th>Equipment Type</th>
+                    <th>Last Inspection Date</th>
                 </tr>
             </thead>
             <tbody>
             @foreach (var equipment in Model)
             {
                         <tr>
-                            <td style="padding: 10px; border: 1px solid #ddd; text-align: left;">@equipment.SerialNumber</td>
-                            <td style="padding: 10px; border: 1px solid #ddd; text-align: left;">@equipment.EquipmentType</td>
-                            <td style="padding: 10px; border: 1px solid #ddd; text-align: left;">@equipment.LastInspectionDate.ToString("yyyy-MM-dd")</td>
+                            <td>@equipment.SerialNumber</td>
+                            <td>@equipment.EquipmentType</td>
+                            <td>@equipment.LastInspectionDate.ToString("yyyy-MM-dd")</td>
                         </tr>
             }
             </tbody>

@@ -4,21 +4,21 @@
     ViewData["Title"] = "Land Shipments";
 }
 
-<h2 style="text-align: center; margin-bottom: 20px;">Land Shipments</h2>
+<h2 class="header-text">Land Shipments</h2>
 
-<table style="width: 100%; border-collapse: collapse; margin-bottom: 20px;">
+<table class="primary">
     <thead>
         <tr>
-            <th style="padding: 10px; border: 1px solid #ddd; background-color: #f2f2f2; text-align: left;">Id</th>
-            <th style="padding: 10px; border: 1px solid #ddd; background-color: #f2f2f2; text-align: left;">Actions</th>
+            <th>Id</th>
+            <th>Actions</th>
         </tr>
     </thead>
     <tbody>
         @foreach (var landShipment in Model)
         {
                     <tr>
-                        <td style="padding: 10px; border: 1px solid #ddd; text-align: left;">@landShipment.Id</td>
-                        <td style="padding: 10px; border: 1px solid #ddd; text-align: left;">
+                        <td>@landShipment.Id</td>
+                        <td>
                             <a href="@Url.Action("Cargo", "LandShipments", new { id = landShipment.Id })" style="text-decoration: none; color: blue;">View Cargo</a>
                         </td>
                     </tr>
