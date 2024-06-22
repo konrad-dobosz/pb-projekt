@@ -82,7 +82,7 @@ void SeedDatabase(IHost app)
                 };
 
           
-                var hangar = new Hangar { AvailableSpace = 1000, LoadedCrates = 0, Cargoes = hangarCargoes };
+                var hangar = new Hangar { AvailableSpace = 1000, Cargoes = hangarCargoes };
                 context.Hangars.Add(hangar);
                 context.SaveChanges(); 
                 var landShipmentCargoes = new List<Cargo>

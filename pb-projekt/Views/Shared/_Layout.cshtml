@@ -1,11 +1,19 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-    <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" type="text/css" href="~/wwwroot/css/style.css" />
 </head>
 <body>
+    <div class="navbar">
+        <ul>
+            <li><a href="@Url.RouteUrl("Ships")">Ships</a></li>
+            <li><a href="@Url.RouteUrl("Hangars")">Hangars</a></li>
+            <li><a href="@Url.RouteUrl("LandShipments")">Land Shipments</a></li>
+        </ul>
+    </div>
     @RenderBody()
 </body>
 </html>

@@ -11,9 +11,6 @@ namespace pb_projekt.Models
         [Required]
         public int AvailableSpace { get; set; }
 
-        [Required]
-        public int LoadedCrates { get; set; }
-
         public ICollection<Cargo> Cargoes { get; set; } = new List<Cargo>();
 
         public ICollection<LandShipment> LandShipments { get; set; } = new List<LandShipment>();
