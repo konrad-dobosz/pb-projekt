@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using pb_projekt.Data;
@@ -5,6 +6,7 @@ using pb_projekt.Models;
 
 namespace pb_projekt.Controllers;
 
+[AllowAnonymous]
 public class AuthController(SignInManager<User> signInManager, UserManager<User> userManager) : Controller
 {
     
