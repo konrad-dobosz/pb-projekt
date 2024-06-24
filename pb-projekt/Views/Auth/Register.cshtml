@@ -4,7 +4,7 @@
 }
 
 <div>
-    <h2>Rejestracja</h2>
+    <h2>Welcome!</h2>
     
     <div class="container">
         @using (Html.BeginForm("Register", "Auth", FormMethod.Post)) {
@@ -13,10 +13,10 @@
                 @Html.TextBox("Email")<br>
             </div>
             <div>
-                <label for="Password">Hasło:</label><br>
+                <label for="Password">Password:</label><br>
                 @Html.Password("Password")<br>
             </div>
-            <input type="submit" value="Zarejestruj">
+            <input type="submit" value="Register">
         }
     </div>
     <link rel="stylesheet" type="text/css" href="~/css/login.css"/>
