@@ -37,6 +37,8 @@ namespace pb_projekt.Controllers
                 return NotFound();
             }
 
+            ViewBag.Hangars = await _context.Hangars.ToListAsync();
+
             return View(ship);
         }
 
@@ -58,7 +60,7 @@ namespace pb_projekt.Controllers
 
         [HttpGet]
         [Route("/ships/add", Name = "AddShip")]
-        public async Task<IActionResult> Add()
+        public IActionResult Add()
         {
             return View();
         }
@@ -67,11 +69,11 @@ namespace pb_projekt.Controllers
         public async Task<IActionResult> Add(double capacity, string dock)
         {
             _context.Ships.Add(
-                    new Ship()
-                    {
-                        CargoCapacity = capacity,
-                        DockingSpace = dock
-                    });
+                new Ship()
+                {
+                    CargoCapacity = capacity,
+                    DockingSpace = dock
+                });
             await _context.SaveChangesAsync();
             return RedirectToRoute("Ships");
         }
@@ -102,16 +104,37 @@ namespace pb_projekt.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Remove(int shipId)
         {
-            _context.Ships.Remove(
-                    new Ship()
-                    {
-                        Id = shipId
-                    }
-            );
-            await _context.SaveChangesAsync();
+            var ship = await _context.Ships.FindAsync(shipId);
+            if (ship != null)
+            {
+                _context.Ships.Remove(ship);
+                await _context.SaveChangesAsync();
+            }
             return RedirectToRoute("Ships");
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Route("/ships/{id}/cargo")]
+        public async Task<IActionResult> TransferCargo(int cargoId, int hangarId)
+        {
+            var cargo = await _context.Cargoes.FindAsync(cargoId);
+            if (cargo == null)
+            {
+                return NotFound();
+            }
+
+            cargo.ShipId = null;
+            cargo.HangarId = hangarId;
+            var hangar = await _context.Hangars.FindAsync(hangarId);
+            hangar.Cargoes.Add(cargo);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction("");
+        }
+
     }
 }

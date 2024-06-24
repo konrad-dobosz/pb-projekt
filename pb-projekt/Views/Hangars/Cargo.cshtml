@@ -14,6 +14,7 @@
             <th>Weight</th>
             <th>Cargo Type</th>
             <th>Destination Port</th>
+            <th>Actions</th>
         </tr>
     </thead>
     <tbody>
@@ -25,6 +26,19 @@
                     <td>@cargo.Weight</td>
                     <td>@cargo.CargoType</td>
                     <td>@cargo.DestinationPort</td>
+                    <td>
+                        <form asp-action="TransferCargo" method="post">
+                        @Html.AntiForgeryToken()
+                            <input type="hidden" name="cargoId" value="@cargo.Id" />
+                            <select name="landShipmentId">
+                            @foreach (var landShipment in ViewBag.LandShipments)
+                            {
+                                        <option value="@landShipment.Id">@landShipment.Id</option>
+                            }
+                            </select>
+                            <button type="submit">Prześlij</button>
+                        </form>
+                    </td>
                 </tr>
         }
     </tbody>

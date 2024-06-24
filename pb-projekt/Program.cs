@@ -81,39 +81,54 @@ void SeedDatabase(IHost app)
             };
 
             context.Ships.AddRange(ships);
-            context.SaveChanges(); 
+            context.SaveChanges();
 
             foreach (var ship in ships)
             {
-     
+                // Create cargoes for ships
+                var shipCargoes = new List<Cargo>
+                {
+                    new Cargo { SerialNumber = $"Ship-SN1-{ship.Id}", SecurityLevel = "High", Weight = 100, CargoType = "General", DestinationPort = "Port A", ShipId = ship.Id },
+                    new Cargo { SerialNumber = $"Ship-SN2-{ship.Id}", SecurityLevel = "High", Weight = 110, CargoType = "General", DestinationPort = "Port B", ShipId = ship.Id },
+                    new Cargo { SerialNumber = $"Ship-SN3-{ship.Id}", SecurityLevel = "High", Weight = 120, CargoType = "General", DestinationPort = "Port C", ShipId = ship.Id },
+                    new Cargo { SerialNumber = $"Ship-SN4-{ship.Id}", SecurityLevel = "High", Weight = 130, CargoType = "General", DestinationPort = "Port D", ShipId = ship.Id },
+                    new Cargo { SerialNumber = $"Ship-SN5-{ship.Id}", SecurityLevel = "High", Weight = 140, CargoType = "General", DestinationPort = "Port E", ShipId = ship.Id }
+                };
+
+                // Add cargoes to ship
+                context.Cargoes.AddRange(shipCargoes);
+                context.SaveChanges();
+
+                // Create hangar and associated cargoes
                 var hangarCargoes = new List<Cargo>
                 {
-                    new Cargo { SerialNumber = $"Hangar-SN1-{ship.Id}", SecurityLevel = "High", Weight = 100, CargoType = "General", DestinationPort = "Port A", ShipId = ship.Id },
-                    new Cargo { SerialNumber = $"Hangar-SN2-{ship.Id}", SecurityLevel = "High", Weight = 110, CargoType = "General", DestinationPort = "Port B", ShipId = ship.Id },
-                    new Cargo { SerialNumber = $"Hangar-SN3-{ship.Id}", SecurityLevel = "High", Weight = 120, CargoType = "General", DestinationPort = "Port C", ShipId = ship.Id },
-                    new Cargo { SerialNumber = $"Hangar-SN4-{ship.Id}", SecurityLevel = "High", Weight = 130, CargoType = "General", DestinationPort = "Port D", ShipId = ship.Id },
-                    new Cargo { SerialNumber = $"Hangar-SN5-{ship.Id}", SecurityLevel = "High", Weight = 140, CargoType = "General", DestinationPort = "Port E", ShipId = ship.Id }
+                    new Cargo { SerialNumber = $"Hangar-SN1-{ship.Id}", SecurityLevel = "High", Weight = 200, CargoType = "General", DestinationPort = "Port F", ShipId = ship.Id },
+                    new Cargo { SerialNumber = $"Hangar-SN2-{ship.Id}", SecurityLevel = "High", Weight = 210, CargoType = "General", DestinationPort = "Port G", ShipId = ship.Id },
+                    new Cargo { SerialNumber = $"Hangar-SN3-{ship.Id}", SecurityLevel = "High", Weight = 220, CargoType = "General", DestinationPort = "Port H", ShipId = ship.Id },
+                    new Cargo { SerialNumber = $"Hangar-SN4-{ship.Id}", SecurityLevel = "High", Weight = 230, CargoType = "General", DestinationPort = "Port I", ShipId = ship.Id },
+                    new Cargo { SerialNumber = $"Hangar-SN5-{ship.Id}", SecurityLevel = "High", Weight = 240, CargoType = "General", DestinationPort = "Port J", ShipId = ship.Id }
                 };
 
-          
                 var hangar = new Hangar { AvailableSpace = 1000, Cargoes = hangarCargoes };
                 context.Hangars.Add(hangar);
-                context.SaveChanges(); 
+                context.SaveChanges();
+
+                // Create land shipment and associated cargoes
                 var landShipmentCargoes = new List<Cargo>
                 {
-                    new Cargo { SerialNumber = $"LandShipment-SN1-{ship.Id}", SecurityLevel = "High", Weight = 150, CargoType = "General", DestinationPort = "Port F", ShipId = ship.Id },
-                    new Cargo { SerialNumber = $"LandShipment-SN2-{ship.Id}", SecurityLevel = "High", Weight = 160, CargoType = "General", DestinationPort = "Port G", ShipId = ship.Id },
-                    new Cargo { SerialNumber = $"LandShipment-SN3-{ship.Id}", SecurityLevel = "High", Weight = 170, CargoType = "General", DestinationPort = "Port H", ShipId = ship.Id },
-                    new Cargo { SerialNumber = $"LandShipment-SN4-{ship.Id}", SecurityLevel = "High", Weight = 180, CargoType = "General", DestinationPort = "Port I", ShipId = ship.Id },
-                    new Cargo { SerialNumber = $"LandShipment-SN5-{ship.Id}", SecurityLevel = "High", Weight = 190, CargoType = "General", DestinationPort = "Port J", ShipId = ship.Id }
+                    new Cargo { SerialNumber = $"LandShipment-SN1-{ship.Id}", SecurityLevel = "High", Weight = 300, CargoType = "General", DestinationPort = "Port K", ShipId = ship.Id },
+                    new Cargo { SerialNumber = $"LandShipment-SN2-{ship.Id}", SecurityLevel = "High", Weight = 310, CargoType = "General", DestinationPort = "Port L", ShipId = ship.Id },
+                    new Cargo { SerialNumber = $"LandShipment-SN3-{ship.Id}", SecurityLevel = "High", Weight = 320, CargoType = "General", DestinationPort = "Port M", ShipId = ship.Id },
+                    new Cargo { SerialNumber = $"LandShipment-SN4-{ship.Id}", SecurityLevel = "High", Weight = 330, CargoType = "General", DestinationPort = "Port N", ShipId = ship.Id },
+                    new Cargo { SerialNumber = $"LandShipment-SN5-{ship.Id}", SecurityLevel = "High", Weight = 340, CargoType = "General", DestinationPort = "Port O", ShipId = ship.Id }
                 };
 
-                // Create LandShipment and associate Cargoes
                 var landShipment = new LandShipment { HangarId = hangar.Id, Cargoes = landShipmentCargoes };
                 context.LandShipments.Add(landShipment);
-                context.SaveChanges(); 
+                context.SaveChanges();
             }
 
+            // Add unloading equipments for the second ship
             var secondShip = context.Ships.FirstOrDefault(s => s.DockingSpace == "Dock 2");
             if (secondShip != null)
             {
@@ -129,5 +144,6 @@ void SeedDatabase(IHost app)
         }
     }
 }
+
 
 

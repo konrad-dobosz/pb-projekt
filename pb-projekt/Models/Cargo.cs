@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace pb_projekt.Models
 {
@@ -26,7 +27,15 @@ namespace pb_projekt.Models
         [MaxLength(100)]
         public string DestinationPort { get; set; }
 
-        public int ShipId { get; set; }
+        public int? ShipId { get; set; }
         public Ship Ship { get; set; }
+
+        public int? HangarId { get; set; }
+        public Hangar Hangar { get; set; }
+
+        public int? LandShipmentId { get; set; }
+        public LandShipment LandShipment { get; set; }
+
+
     }
 }

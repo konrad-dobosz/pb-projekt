@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using pb_projekt.Data;
 
@@ -10,9 +11,11 @@ using pb_projekt.Data;
 namespace pb_projekt.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240624110657_1")]
+    partial class _1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -432,7 +435,7 @@ namespace pb_projekt.Migrations
                         .HasForeignKey("HangarId")
                         .OnDelete(DeleteBehavior.SetNull);
 
-                    b.HasOne("pb_projekt.Models.LandShipment", "LandShipment")
+                    b.HasOne("pb_projekt.Models.LandShipment", null)
                         .WithMany("Cargoes")
                         .HasForeignKey("LandShipmentId");
 
@@ -442,8 +445,6 @@ namespace pb_projekt.Migrations
                         .OnDelete(DeleteBehavior.SetNull);
 
                     b.Navigation("Hangar");
-
-                    b.Navigation("LandShipment");
 
                     b.Navigation("Ship");
                 });
