@@ -1,0 +1,22 @@
+@model pb_projekt.Models.Ship
+
+@{
+    ViewData["Title"] = "Edit ship";
+}
+
+<h2 class="header-text">Edit ship</h2>
+
+<div class="container">
+    @using (Html.BeginForm("Edit", "Ships", FormMethod.Post)) {
+        @Html.Hidden("ShipId", Model.Id)
+        <div>
+            <label for="Capacity">Capacity:</label><br>
+            @Html.TextBox("Capacity", Model.CargoCapacity)<br>
+        </div>
+        <div>
+            <label for="Dock">Docking space:</label><br>
+            @Html.TextBox("Dock", Model.DockingSpace)<br>
+        </div>
+        <input type="submit" value="Change">
+    }
+</div>

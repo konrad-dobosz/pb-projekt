@@ -75,6 +75,31 @@ namespace pb_projekt.Controllers
             await _context.SaveChangesAsync();
             return RedirectToRoute("Ships");
         }
+        
+        [HttpGet]
+        [Route("/ships/{id}/edit", Name = "ShipEdit")]
+        public async Task<IActionResult> Edit(int id)
+        {
+            var ship = await _context.Ships.FindAsync(id);
+
+            if (ship == null)
+            {
+                return NotFound();
+            }
+
+            return View(ship);
+        }
+        
+        [HttpPost]
+        [Route("/ships/{id}/edit")]
+        public async Task<IActionResult> Edit(int shipId, double capacity, string dock)
+        {
+            var edited = new Ship() { Id = shipId, CargoCapacity = capacity, DockingSpace = dock };
+
+            _context.Ships.Update(edited);
+            await _context.SaveChangesAsync();
+            return RedirectToRoute("Ships");
+        }
 
         [HttpPost]
         public async Task<IActionResult> Remove(int shipId)

@@ -15,7 +15,8 @@
             <th>Cargo Capacity</th>
             <th>Docking Space</th>
             <th>Unloading In Progress</th>
-            <th>Actions</th>
+            <th>Cargo Actions</th>
+            <th>Ship Actions</th>
         </tr>
     </thead>
     <tbody>
@@ -36,13 +37,15 @@
                     }
                     </td>
                     <td>
-                        <a href="@Url.RouteUrl("ShipCargo", new { id = ship.Id })" style="text-decoration: none; color: blue;">View Cargo</a>
+                        <a href="@Url.RouteUrl("ShipCargo", new { id = ship.Id })" style="text-decoration: none; color: blue;">View</a>
                     </td>
-                    <td>
+                    <td class="td-row">
+                        <a href="@Url.RouteUrl("ShipEdit", new { id = ship.Id })" style="text-decoration: none; color: blue;">Edit</a>
+                        
                         @using (Html.BeginForm("Remove", "Ships", FormMethod.Post))
                         {
                             @Html.Hidden("ShipId", ship.Id)
-                            <button type="submit">Delete</button>
+                            <button class="action-btn" type="submit">Delete</button>
                         }
                     </td>
                 </tr>
