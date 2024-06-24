@@ -33,7 +33,7 @@ public class AuthController(SignInManager<User> signInManager, UserManager<User>
     }
 
     [HttpGet]
-    [Route("/auth/logout")]
+    [Route("/auth/logout", Name = "Logout")]
     public async Task<ActionResult> Logout()
     {
         await signInManager.SignOutAsync();
