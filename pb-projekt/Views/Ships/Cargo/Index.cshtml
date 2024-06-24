@@ -6,6 +6,8 @@
 
 <h2 class="header-text">Cargo of Ship @Model.Id</h2>
 
+<a href="@Url.RouteUrl("AddCargo", new { id = Model.Id })" style="text-decoration: none; color: blue;">Add cargo</a>
+
 @if (!Model.Cargoes.Any())
 {
         <p style="text-align: center;">No cargo available for this ship.</p>
