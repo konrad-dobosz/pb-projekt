@@ -49,7 +49,41 @@ namespace pb_projekt.Controllers
 
             ViewBag.Hangars = await _context.Hangars.ToListAsync();
 
-            return View(ship);
+            return View("Cargo/Index", ship);
+        }
+        
+        [HttpGet]
+        [Route("/ships/{id}/cargo/add", Name = "AddCargo")]
+        public async Task<IActionResult> AddCargo(int id)
+        {
+            var ship = await _context.Ships
+                .Include(s => s.Cargoes)
+                .FirstOrDefaultAsync(s => s.Id == id);
+
+            if (ship == null)
+            {
+                return NotFound();
+            }
+            
+            return View("Cargo/Add", ship);
+        }
+
+        [HttpPost]
+        [Route("/ships/{id}/cargo/add")]
+        public async Task<IActionResult> AddCargo(int shipId, string serialNumber, string securityLevel, string weight, string cargoType, string destinationPort)
+        {
+            _context.Cargoes.Add(
+                new Cargo()
+                {
+                    SerialNumber = serialNumber,
+                    SecurityLevel = securityLevel,
+                    Weight = double.Parse(weight),
+                    CargoType = cargoType,
+                    DestinationPort = destinationPort,
+                    ShipId = shipId
+                });
+            await _context.SaveChangesAsync();
+            return RedirectToRoute("ShipCargo", new { id = shipId });
         }
 
         [HttpGet]

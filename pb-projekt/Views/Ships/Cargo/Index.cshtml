@@ -6,6 +6,8 @@
 
 <h2 class="header-text">Cargo of Ship @Model.Id</h2>
 
+<a href="@Url.RouteUrl("AddCargo", new { id = Model.Id })" style="text-decoration: none; color: blue;">Add cargo</a>
+
 @if (!Model.Cargoes.Any())
 {
         <p style="text-align: center;">No cargo available for this ship.</p>
@@ -21,7 +23,7 @@ else
                     <th>Weight</th>
                     <th>Cargo Type</th>
                     <th>Destination Port</th>
-                    <th>Actions</th>
+                    <th>Move to hangar</th>
                 </tr>
             </thead>
             <tbody>
@@ -44,7 +46,7 @@ else
                                                 <option value="@hangar.Id">@hangar.Id</option>
                                 }
                                     </select>
-                                    <button type="submit">Prześlij</button>
+                                    <button type="submit">Move</button>
                                 </form>
                             </td>
                         </tr>

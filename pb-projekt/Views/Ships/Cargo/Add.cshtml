@@ -1,0 +1,50 @@
+@model pb_projekt.Models.Ship
+
+@{
+    ViewData["Title"] = "Add cargo to ship id:";
+}
+
+<h2 class="header-text">Add cargo to ship id: @Model.Id</h2>
+
+<div class="container">
+    @using (Html.BeginForm("AddCargo", "Ships", FormMethod.Post)) {
+        @Html.Hidden("ShipId", Model.Id)
+        <div>
+            <label for="SerialNumber">Serial number:</label><br>
+            @Html.TextBox("SerialNumber")<br>
+        </div>
+        <div>
+            <label for="SecurityLevel">Security level:</label><br>
+            @Html.DropDownList("SecurityLevel", new List<SelectListItem>
+            {
+             new SelectListItem() { Text = "High", Value = "High" },
+             new SelectListItem() { Text = "Medium", Value = "Medium" },
+             new SelectListItem() { Text = "Low", Value = "Low" },
+            })
+            <br>
+        </div>
+        <div>
+            <label for="Weight">Weight:</label><br>
+            @Html.TextBox("Weight", 0)<br>
+        </div>
+        <div>
+            <label for="CargoType">CargoType:</label><br>
+            @Html.DropDownList("CargoType", new List<SelectListItem>
+            {
+                new SelectListItem() { Text = "General", Value = "General" },
+                new SelectListItem() { Text = "Hazardous", Value = "Hazardous" },
+                new SelectListItem() { Text = "Refrigerated", Value = "Refrigerated" },
+                new SelectListItem() { Text = "Fragile", Value = "Fragile" },
+                new SelectListItem() { Text = "Electronics", Value = "Electronics" },
+                new SelectListItem() { Text = "Textiles", Value = "Textiles" },
+                new SelectListItem() { Text = "Automobiles", Value = "Automobiles" }
+            })
+            <br>
+        </div>
+        <div>
+            <label for="DestinationPort">Destination port:</label><br>
+            @Html.TextBox("DestinationPort", "Dock A")<br>
+        </div>
+        <input type="submit" value="Add">
+    }
+</div>

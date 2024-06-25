@@ -1,0 +1,31 @@
+@model IEnumerable<pb_projekt.Models.UnloadingEquipment>
+
+@{
+    ViewData["Title"] = "Unloading equipment";
+}
+
+<h2 class="header-text">Unloading equipment</h2>
+
+<table class="primary">
+    <thead>
+    <tr>
+        <th>Id</th>
+        <th>Is assigned to ship</th>
+        <th>Serial number</th>
+        <th>Equipment type</th>
+        <th>Last inspection date</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var unloadingEquipment in Model)
+    {
+        <tr>
+            <td>@unloadingEquipment.Id</td>
+            <td>@unloadingEquipment.IsAssignedToShip</td>
+            <td>@unloadingEquipment.SerialNumber</td>
+            <td>@unloadingEquipment.EquipmentType</td>
+            <td>@unloadingEquipment.LastInspectionDate.ToString("yyyy-MM-dd")</td>
+        </tr>
+    }
+    </tbody>
+</table>

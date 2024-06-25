@@ -1,9 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using pb_projekt.Data;
-using pb_projekt.Models;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace pb_projekt.Controllers
 {
@@ -17,7 +14,7 @@ namespace pb_projekt.Controllers
         }
 
         [HttpGet]
-        [Route("/landshipments", Name = "LandShipments")]
+        [Route("/land_shipments", Name = "LandShipments")]
         public async Task<IActionResult> Index()
         {
             var landShipments = await _context.LandShipments.Include(l => l.Vehicles).ToListAsync();
@@ -25,7 +22,7 @@ namespace pb_projekt.Controllers
         }
 
         [HttpGet]
-        [Route("/landshipments/{id}/cargo", Name = "LandShipmentCargo")]
+        [Route("/land_shipments/{id}/cargo", Name = "LandShipmentCargo")]
         public async Task<IActionResult> Cargo(int id)
         {
             var landShipment = await _context.LandShipments
