@@ -17,6 +17,7 @@
             <th>Unloading In Progress</th>
             <th>Cargo Actions</th>
             <th>Ship Actions</th>
+            <th>Unloading Equipment Actions</th>
         </tr>
     </thead>
     <tbody>
@@ -41,12 +42,32 @@
                     </td>
                     <td class="td-row">
                         <a href="@Url.RouteUrl("ShipEdit", new { id = ship.Id })" style="text-decoration: none; color: blue;">Edit</a>
-                        
-                        @using (Html.BeginForm("Remove", "Ships", FormMethod.Post))
-                        {
-                            @Html.Hidden("ShipId", ship.Id)
-                            <button class="action-btn" type="submit">Delete</button>
-                        }
+
+                    @using (Html.BeginForm("Remove", "Ships", FormMethod.Post))
+                    {
+                        @Html.Hidden("ShipId", ship.Id)
+                                <button class="action-btn" type="submit">Delete</button>
+                    }
+                    </td>
+                    <td>
+                    @using (Html.BeginForm("AssignUnloadingEquipment", "Ships", FormMethod.Post, new { @id =ship.Id }))
+                    {
+                        @Html.AntiForgeryToken()
+                                <input type="hidden" name="shipId" value="@ship.Id" />
+                                <select name="equipmentId">
+                            @foreach (var equipment in ViewBag.UnassignedEquipments)
+                            {
+                                            <option value="@equipment.Id">@equipment.EquipmentType (SN: @equipment.SerialNumber)</option>
+                            }
+                                </select>
+                                <button type="submit">Assign Equipment</button>
+                    }
+                    @using (Html.BeginForm("UnloadAllEquipment", "Ships", FormMethod.Post, new { @id = ship.Id }))
+                    {
+                        @Html.AntiForgeryToken()
+                                <input type="hidden" name="idstatku" value="@ship.Id" />
+                                <button type="submit">Unload All Equipment</button>
+                    }
                     </td>
                 </tr>
         }

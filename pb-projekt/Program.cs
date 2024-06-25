@@ -141,9 +141,16 @@ void SeedDatabase(IHost app)
                 context.UnloadingEquipments.AddRange(unloadingEquipments);
                 context.SaveChanges();
             }
+
+            // Add unassigned unloading equipments
+            var unassignedUnloadingEquipments = new List<UnloadingEquipment>
+            {
+                new UnloadingEquipment { SerialNumber = "UE3", EquipmentType = "Conveyor Belt", LastInspectionDate = DateTime.Now, ShipId = null, IsAssignedToShip = false },
+                new UnloadingEquipment { SerialNumber = "UE4", EquipmentType = "Loading Arm", LastInspectionDate = DateTime.Now, ShipId = null, IsAssignedToShip = false }
+            };
+
+            context.UnloadingEquipments.AddRange(unassignedUnloadingEquipments);
+            context.SaveChanges();
         }
     }
 }
-
-
-

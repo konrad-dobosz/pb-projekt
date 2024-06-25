@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using NuGet.Packaging;
 using pb_projekt.Data;
 using pb_projekt.Models;
 using System.Linq;
@@ -20,7 +21,16 @@ namespace pb_projekt.Controllers
         [Route("/ships", Name = "Ships")]
         public async Task<IActionResult> Index()
         {
-            var ships = await _context.Ships.Include(s => s.UnloadingEquipments).ToListAsync();
+            var ships = await _context.Ships
+                .Include(s => s.Cargoes)
+                .Include(s => s.UnloadingEquipments)
+                .ToListAsync();
+
+            
+            ViewBag.UnassignedEquipments = await _context.UnloadingEquipments
+                .Where(e => e.ShipId == null)
+                .ToListAsync();
+
             return View(ships);
         }
 
@@ -110,11 +120,23 @@ namespace pb_projekt.Controllers
             var ship = await _context.Ships.FindAsync(shipId);
             if (ship != null)
             {
+                var unloadingEquipments = await _context.UnloadingEquipments
+                                                         .Where(e => e.ShipId == ship.Id)
+                                                         .ToListAsync();
+
+                foreach (var unload in unloadingEquipments)
+                {
+                    unload.ShipId = null;
+                    unload.IsAssignedToShip = false;
+                }
+
+                await _context.SaveChangesAsync();
                 _context.Ships.Remove(ship);
                 await _context.SaveChangesAsync();
             }
             return RedirectToRoute("Ships");
         }
+
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -136,5 +158,47 @@ namespace pb_projekt.Controllers
             return RedirectToAction("");
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Route("/ships/unloaddell")]
+        public async Task<IActionResult> UnloadAllEquipment(int idstatku)
+        {
+            var unloadingEquipments = await _context.UnloadingEquipments
+                                                         .Where(e => e.ShipId == idstatku)
+                                                         .ToListAsync();
+
+                foreach (var unload in unloadingEquipments)
+                {
+                    unload.ShipId = null;
+                    unload.IsAssignedToShip = false;
+                }
+
+                await _context.SaveChangesAsync();
+
+            return RedirectToRoute("Ships");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Route("/ships")]
+        public async Task<IActionResult> AssignUnloadingEquipment(int shipId, int equipmentId)
+        {
+            var ship = await _context.Ships.FindAsync(shipId);
+            var equipment = await _context.UnloadingEquipments.FindAsync(equipmentId);
+
+            if (ship == null || equipment == null)
+            {
+                return NotFound();
+            }
+
+            equipment.ShipId = ship.Id;
+            equipment.IsAssignedToShip = true;
+
+            ship.UnloadingEquipments.Add(equipment);
+
+            await _context.SaveChangesAsync();
+            return RedirectToRoute("Ships");
+        }
     }
+
 }
