@@ -13,7 +13,6 @@ namespace pb_projekt.Data
         public DbSet<Ship> Ships { get; set; }
         public DbSet<UnloadingEquipment> UnloadingEquipments { get; set; }
         public DbSet<Hangar> Hangars { get; set; }
-        public DbSet<Vehicle> Vehicles { get; set; }
         public DbSet<LandShipment> LandShipments { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

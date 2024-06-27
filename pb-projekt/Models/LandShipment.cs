@@ -7,9 +7,7 @@ namespace pb_projekt.Models
     {
         [Key]
         public int Id { get; set; }
-
-        public ICollection<Vehicle> Vehicles { get; set; } = new List<Vehicle>();
-
+        
         public ICollection<Cargo> Cargoes { get; set; } = new List<Cargo>(); 
 
         public int HangarId { get; set; }

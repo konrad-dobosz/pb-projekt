@@ -350,30 +350,6 @@ namespace pb_projekt.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
-            modelBuilder.Entity("pb_projekt.Models.Vehicle", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("ArrivalDate")
-                        .HasColumnType("datetime(6)");
-
-                    b.Property<string>("DestinationPort")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("varchar(100)");
-
-                    b.Property<int>("LandShipmentId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("LandShipmentId");
-
-                    b.ToTable("Vehicles");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -474,17 +450,6 @@ namespace pb_projekt.Migrations
                     b.Navigation("Ship");
                 });
 
-            modelBuilder.Entity("pb_projekt.Models.Vehicle", b =>
-                {
-                    b.HasOne("pb_projekt.Models.LandShipment", "LandShipment")
-                        .WithMany("Vehicles")
-                        .HasForeignKey("LandShipmentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("LandShipment");
-                });
-
             modelBuilder.Entity("pb_projekt.Models.Hangar", b =>
                 {
                     b.Navigation("Cargoes");
@@ -497,8 +462,6 @@ namespace pb_projekt.Migrations
                     b.Navigation("Cargoes");
 
                     b.Navigation("UnloadingEquipments");
-
-                    b.Navigation("Vehicles");
                 });
 
             modelBuilder.Entity("pb_projekt.Models.Ship", b =>

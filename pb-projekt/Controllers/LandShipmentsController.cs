@@ -17,7 +17,7 @@ namespace pb_projekt.Controllers
         [Route("/land_shipments", Name = "LandShipments")]
         public async Task<IActionResult> Index()
         {
-            var landShipments = await _context.LandShipments.Include(l => l.Vehicles).ToListAsync();
+            var landShipments = await _context.LandShipments.ToListAsync();
             return View(landShipments);
         }
 
